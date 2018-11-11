@@ -1,14 +1,44 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color="negro">
+        <ion-title>
+            ChapiLimpio
+        </ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content>
+
+    <ion-card *ngFor="let item of _carFotoPrv.imagenes">
+        <img src="https://www.antiagingya.com/es/wp-content/uploads/3015/10/culo-portada.jpg" />
+        <ion-card-content>
+            <ion-card-title>
+                {{ item.titulo}} La Basura en Chapinero
+            </ion-card-title>
+            <p>
+                Esto ocure en la ciudad y solo nos incomoda pero no hacemos hada para impedirlo.
+            </p>
+        </ion-card-content>
+
+        <ion-row>
+            <ion-col text-right>
+                <button ion-button clear small color="primary" (click)="compartir(item)">
+                <ion-icon name="share-alt" ></ion-icon>
+                Compartir
+            </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+
+    <ion-fab right bottom>
+        <button ion-fab (click)="mostar_modal()"><ion-icon name="add"></ion-icon></button>
+        <ion-fab-list>
+
+        </ion-fab-list>
+    </ion-fab>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" [enabled]="hayMasImagenes">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
 </ion-content>
