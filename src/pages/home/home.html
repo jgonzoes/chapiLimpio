@@ -9,10 +9,10 @@
 <ion-content>
 
     <ion-card *ngFor="let item of _carFotoPrv.imagenes">
-        <img src="https://www.antiagingya.com/es/wp-content/uploads/3015/10/culo-portada.jpg" />
+        <img src="{{ item.url }}" />
         <ion-card-content>
             <ion-card-title>
-                {{ item.titulo}} La Basura en Chapinero
+                {{ item.titulo }}
             </ion-card-title>
             <p>
                 Esto ocure en la ciudad y solo nos incomoda pero no hacemos hada para impedirlo.

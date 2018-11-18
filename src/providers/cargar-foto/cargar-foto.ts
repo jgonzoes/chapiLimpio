@@ -15,7 +15,7 @@ export class CargarFotoProvider {
   constructor(public toastCtrl: ToastController,
               public angFireBase: AngularFireDatabase) {
    // this.cargarUltimaKey().subscribe( ()=> this.cargarImagenes())
-    
+
   }
 
   cargarImagenFirebase( archivo:ArchivoSubir ){
@@ -40,7 +40,7 @@ export class CargarFotoProvider {
             ()=>{
               console.log('Imagen cargada');
               this.mostarMensaje('Imagen cargada correctamente');
-              
+
               let url = uploadTask.snapshot.downloadURL;
               this.crearPost( archivo.titulo, url, nombreFoto );
 
@@ -50,17 +50,22 @@ export class CargarFotoProvider {
     });
     return promesa
   }
-  
-  private crearPost( titulo: string, url: string, nombreArchivo:string ){
+
+  public crearPost( titulo: string, url: string, nombreArchivo?:string ){
     let post: ArchivoSubir = {
       imagen: url,
       titulo: titulo,
       key: nombreArchivo
     };
     console.log( JSON.stringify(post) );
+    if (nombreArchivo) {
+      this.angFireBase.object(`${ this.coleccion }/${ nombreArchivo }`).update(post);
+    }
+    else{
+      this.angFireBase.list(this.coleccion).push(post) //Crea el id automatico
+    }
 
-     //this.angFireBase.list(this.coleccion).push(post) //lo crea el solo
-    this.angFireBase.object(`${ this.coleccion }/${ nombreArchivo }`).update(post);
+
     this.imagenes.push( post );
   }
 
@@ -73,7 +78,7 @@ export class CargarFotoProvider {
                 this.imagenes.push( FotoCargada[0] );
               });
               console.log("el servicio " + this.lastKey);
-    
+
     return listaDB;
   }
 

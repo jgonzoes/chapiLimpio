@@ -15,8 +15,8 @@ export class HomePage {
   constructor(private modalCtr:ModalController,
               public _carFotoPrv:CargarFotoProvider,
               private socialSharing: SocialSharing ) {
-
-                //this._carFotoPrv.crearPost("El titulo", "https://www.antiagingya.com/es/wp-content/uploads/3015/10/culo-portada.jpg","ElnombreArchivo");
+              //Envia la primera
+              this._carFotoPrv.crearPost("El titulo", "assets/imgs/chapilogo.png","ElnombreArchivo");
   }
 
   mostar_modal(){
